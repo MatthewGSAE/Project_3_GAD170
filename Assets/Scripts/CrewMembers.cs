@@ -6,5 +6,4 @@ public class CrewMembers : MonoBehaviour
 {
     public List<Applicant> crewMembersOnboard = new List<Applicant>();
 
-
 }

@@ -12,6 +12,8 @@ public class Applicant : MonoBehaviour
 
     [SerializeField] private CrewMembers acceptedHumanApplicants;
 
+
+
     [SerializeField] private string characterName;
     [SerializeField] private string hobby;
     [SerializeField] private bool isAlien;
@@ -29,14 +31,17 @@ public class Applicant : MonoBehaviour
     }
 
     //  acceptedHumanApplicants.crewMembersOnboard.Add(this);
-    // applicantsOnboard++;
-     //onBoardCrewMembersText.text = "Onboard Crew Members: " + applicantsOnboard;
     public void OnAcceptButtonPress()
     {
         if (isAlien == false)
         {
-            applicantsOnboard++;
-            onBoardCrewMembersText.text = "Onboard Crew Members: " + applicantsOnboard;
+            AddCrewMember();
+            CrewMemberList();
+        }
+
+        if (isAlien == true)
+        {
+            AlienAccept();
         }
 
         int rand = Random.Range(0, 2);
@@ -56,8 +61,6 @@ public class Applicant : MonoBehaviour
 
     public void OnDeclineButtonPress()
     {
-
-      
 
         int rand = Random.Range(0, 2);
 
@@ -90,9 +93,9 @@ public class Applicant : MonoBehaviour
         Debug.Log("A New Alien Applicant Has Appeared");
     }
 
-    public void CrewMemberList()
+    private void CrewMemberList()
     {
-     
+        acceptedHumanApplicants.crewMembersOnboard.Add(this);
     }
 
     private void UpdateText()
@@ -100,4 +103,22 @@ public class Applicant : MonoBehaviour
         hobbyText.text = "hobby: " + hobby;
         nameText.text = "Applicant: " + characterName;
     }
+
+    private void AddCrewMember()
+    {
+        applicantsOnboard++;
+        onBoardCrewMembersText.text = "Onboard Crew Members: " + applicantsOnboard;
+    }
+    private void AlienAccept()
+    {
+        int rand = Random.Range(1, applicantsOnboard);
+
+        applicantsOnboard = applicantsOnboard - rand;
+        onBoardCrewMembersText.text = "Onboard Crew Members: " + applicantsOnboard;
+    }
+
+    // need something to remove applicants in list with amount that is removed from applicants on board
+    // need an end game
+    // need a start game
+    // need more descriptions on what the buttons do (in the UI)
 }
